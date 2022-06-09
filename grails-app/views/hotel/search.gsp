@@ -16,11 +16,11 @@
     </g:if>
     <g:else>
         <h1>Найдено отелей: ${hotelCount}</h1>
-        <table class="content scaffold-list">
+        <table class="content scaffold-list table-hover">
             <thead>
             <tr>
-                <th>Hotel</th>
-                <th>Stars</th>
+                <th>Название</th>
+                <th>Звездность</th>
             </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
     </div>
     <div class="nav" role="navigation">
         <ul>
-            <li><a class="home" href="${createLink(uri: '/')}"><g:message code="hotel.search.repeat.label"/></a></li>
+            <li><a class="home" href="${createLink(uri: '/')}">Новый поиск</a></li>
         </ul>
     </div>
 </div>
