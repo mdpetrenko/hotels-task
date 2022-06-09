@@ -1,9 +1,9 @@
 package ru.mdpetrenko.testtasks.hotels
 
-import grails.testing.mixin.integration.Integration
 import grails.gorm.transactions.Rollback
-import spock.lang.Specification
+import grails.testing.mixin.integration.Integration
 import org.hibernate.SessionFactory
+import spock.lang.Specification
 
 @Integration
 @Rollback
@@ -13,14 +13,13 @@ class CountryServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        // TODO: Populate valid domain instances and return a valid ID
-        //new Country(...).save(flush: true, failOnError: true)
-        //new Country(...).save(flush: true, failOnError: true)
-        //Country country = new Country(...).save(flush: true, failOnError: true)
-        //new Country(...).save(flush: true, failOnError: true)
-        //new Country(...).save(flush: true, failOnError: true)
+        new Country(title: 'Russia', capital: 'Moscow').save(flush: true, failOnError: true)
+        new Country(title: 'Germany', capital: 'Berlin').save(flush: true, failOnError: true)
+        Country country = new Country(title: 'Cyprus', capital: 'Pathos').save(flush: true, failOnError: true)
+        new Country(title: 'France', capital: 'Paris').save(flush: true, failOnError: true)
+        new Country(title: 'Spain', capital: 'Madrid').save(flush: true, failOnError: true)
         assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //country.id
+        country.id
     }
 
     void "test get"() {

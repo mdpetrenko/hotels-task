@@ -2,24 +2,36 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'hotel.label', default: 'Hotel')}"/>
+    <g:set var="entityName" value="Hotel"/>
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
 <body>
-%{--<a href="#list-hotel" class="skip" tabindex="-1"><g:message code="default.link.skip.label"--}%
-%{--                                                            default="Skip to content&hellip;"/></a>--}%
-
-<div id="list-hotel" class="content scaffold-list" role="main">
-    <h1><g:message code="hotel.search.results" args="[entityName]"/></h1>
+<div id="search-hotel" class="content scaffold-list" role="main">
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <g:if test="${hotelCount == 0}">
-        <h2>No hotels found</h2>
+        <h1>По Вашему запросу ничего не найдено</h1>
     </g:if>
     <g:else>
-        <f:table collection="hotelList" properties="title, stars"/>
+        <h1>Найдено отелей: ${hotelCount}</h1>
+        <table class="content scaffold-list">
+            <thead>
+            <tr>
+                <th>Hotel</th>
+                <th>Stars</th>
+            </tr>
+            </thead>
+            <tbody>
+            <g:each var = "h" in="${hotelList}">
+                <tr>
+                    <td>${h.title}<g:if test="${h.site}"><br><a href="${h.site}" target="_blank">Перейти на сайт</a> </g:if></td>
+                    <td>${h.stars}</td>
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
     </g:else>
     <div class="pagination">
         <g:paginate total="${hotelCount ?: 0}"/>
