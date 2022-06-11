@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'hotel.label', default: 'Hotel')}"/>
-    <title><g:message code="default.list.label" args="[entityName]"/></title>
+    <title><g:message code="hotels.list.label"/></title>
 </head>
 
 <body>
@@ -13,18 +13,18 @@
 <div class="nav" role="navigation">
     <ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
+        <li><g:link class="create" action="create"><g:message code="default.button.new.label"
                                                               args="[entityName]"/></g:link></li>
     </ul>
 </div>
 
 <div id="list-hotel" class="content scaffold-list" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
+    <h1><g:message code="hotels.list.label"/></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <g:if test="${hotelCount == 0}">
-        <h2>No hotels found</h2>
+        <h2><g:message code="list.empty.label"/> </h2>
     </g:if>
     <g:else>
         <f:table collection="${hotelList}"/>
@@ -33,7 +33,7 @@
         <g:paginate total="${hotelCount ?: 0}"/>
     </div>
 
-    <p><b>Total hotels:</b>${hotelCount}</p>
+    <p><b>${message(code: 'total.entities.label')}</b>${hotelCount}</p>
 </div>
 </body>
 </html>

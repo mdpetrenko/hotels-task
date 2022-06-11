@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>
-    <g:layoutTitle default="Hotels Catalog"/>
+    <g:layoutTitle default="${message(code: 'hotels.list.label')}"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
@@ -25,11 +25,15 @@
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
             <g:pageProperty name="page.nav"/>
-            <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.logicalPropertyName }}">
-                <li class="controller">
-                    <g:link controller="${c.logicalPropertyName}"><g:message code="custom.label" args="[c.name]"/></g:link>
-                </li>
-            </g:each>
+            <li class="controller">
+                <g:link controller="home"><g:message code="home.label"/></g:link>
+            </li>
+            <li class="controller">
+                <g:link controller="hotel"><g:message code="hotels.label"/></g:link>
+            </li>
+            <li class="controller">
+                <g:link controller="country"><g:message code="countries.label"/></g:link>
+            </li>
         </ul>
     </div>
 </nav>
