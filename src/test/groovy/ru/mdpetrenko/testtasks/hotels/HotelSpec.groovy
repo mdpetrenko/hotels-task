@@ -1,9 +1,9 @@
 package ru.mdpetrenko.testtasks.hotels
 
-import grails.testing.web.controllers.ControllerUnitTest
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class HomeControllerSpec extends Specification implements ControllerUnitTest<SearchController> {
+class HotelSpec extends Specification implements DomainUnitTest<Hotel> {
 
     def setup() {
     }

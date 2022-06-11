@@ -14,13 +14,13 @@ class HotelServiceSpec extends Specification {
 
     private Long setupData() {
         // TODO: Populate valid domain instances and return a valid ID
-        //new Hotel(...).save(flush: true, failOnError: true)
-        //new Hotel(...).save(flush: true, failOnError: true)
-        //Hotel hotel = new Hotel(...).save(flush: true, failOnError: true)
-        //new Hotel(...).save(flush: true, failOnError: true)
-        //new Hotel(...).save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
-        //hotel.id
+        Country testCountry = new Country(title: 'Country', capital: 'Capital')
+        new Hotel(title: 'Hotel 1', stars: Hotel.Stars.ONE, country: testCountry).save(flush: true, failOnError: true)
+        new Hotel(title: 'Hotel 2', stars: Hotel.Stars.TWO, country: testCountry, site: 'http://test.site').save(flush: true, failOnError: true)
+        Hotel hotel = new Hotel(title: 'Hotel 3', stars: Hotel.Stars.THREE, country: testCountry, site: 'http://test.site').save(flush: true, failOnError: true)
+        new Hotel(title: 'Hotel 4', stars: Hotel.Stars.FOUR, country: testCountry, site: 'http://test.site').save(flush: true, failOnError: true)
+        new Hotel(title: 'Hotel 5', stars: Hotel.Stars.FIVE, country: testCountry, site: 'http://test.site').save(flush: true, failOnError: true)
+        hotel.id
     }
 
     void "test get"() {
@@ -38,7 +38,7 @@ class HotelServiceSpec extends Specification {
 
         then:
         hotelList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
+        hotelList.get(0).getId() == 8
     }
 
     void "test count"() {
@@ -64,11 +64,13 @@ class HotelServiceSpec extends Specification {
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Hotel hotel = new Hotel()
+        Country country = new Country(title: 'Country Save Test', capital: 'Capital')
+        Hotel hotel = new Hotel(title: 'Hotel Title', stars: Hotel.Stars.FIVE, country: country)
+        Hotel secondHotel = new Hotel(title: 'Second Hotel Title', stars: Hotel.Stars.FIVE, country: country, site: 'http://test.site')
         hotelService.save(hotel)
-
+        hotelService.save(secondHotel)
         then:
         hotel.id != null
+        secondHotel.id != null
     }
 }

@@ -66,6 +66,12 @@ dependencies {
     testCompile "org.mockito:mockito-core"
     testCompile "org.grails:grails-gorm-testing-support:2.6.1"
     testCompile "org.grails:grails-web-testing-support:2.6.1"
+    testImplementation "org.grails.plugins:geb"
+    testCompile "org.seleniumhq.selenium:selenium-remote-driver:3.14.0"
+    testCompile "org.seleniumhq.selenium:selenium-api:3.14.0"
+    testCompile "org.seleniumhq.selenium:selenium-support:3.14.0"
+    testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:3.14.0"
+    testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.14.0"
 }
 
 bootRun {
@@ -84,13 +90,12 @@ tasks.withType(GroovyCompile) {
     }
 }
 
-test {
-    useJUnitPlatform()
+tasks.withType(Test) {
+    systemProperty "geb.env", System.getProperty('geb.env')
+    systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
+    systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
+    systemProperty "webdriver.gecko.driver", System.getProperty('webdriver.gecko.driver')
 }
-
-//tasks.withType(Test) {
-//    useJUnitPlatform()
-//}
 
 assets {
     minifyJs = true

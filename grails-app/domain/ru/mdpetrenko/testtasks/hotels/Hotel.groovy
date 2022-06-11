@@ -28,7 +28,7 @@ class Hotel {
             if (it != null && !it.startsWith("http://") && !it.startsWith("https://")) {
                 return ['notValidUrl']
             }
-        }, nullable: true
+        }, nullable: true, url: true
     }
 
     static mapping = {

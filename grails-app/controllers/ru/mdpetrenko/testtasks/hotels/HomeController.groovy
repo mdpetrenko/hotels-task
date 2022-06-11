@@ -1,6 +1,6 @@
 package ru.mdpetrenko.testtasks.hotels
 
-class SearchController {
+class HomeController {
     HotelService hotelService
     CountryService countryService
 
@@ -9,10 +9,10 @@ class SearchController {
     }
 
     def search(String titlePart, String countryTitle) {
-        def hotels = countryTitle != ''
+        def hotelList = countryTitle != ''
                 ? hotelService.findAllByTitleIlikeAndCountry('%' + titlePart + '%', countryService.findByTitle(countryTitle))
                 : hotelService.findAllByTitleIlike('%' + titlePart + '%')
-        respond hotels, model: [hotelCount: hotels.size()]
+        respond(hotelList: hotelList, hotelCount: hotelList.size())
     }
 
 }

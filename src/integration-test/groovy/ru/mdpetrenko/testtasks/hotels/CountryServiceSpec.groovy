@@ -4,11 +4,10 @@ import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.annotation.DirtiesContext
 import spock.lang.Specification
 
 @Integration
-//@Rollback
+@Rollback
 class CountryServiceSpec extends Specification {
 
     @Autowired
@@ -16,23 +15,19 @@ class CountryServiceSpec extends Specification {
     SessionFactory sessionFactory
 
     private Long setupData() {
-        hotels.each { it.delete(flush: true, failOnError: true) }
-        Country.findAll().each { it.delete(flush: true, failOnError: true) }
-        new Country(title: 'test1', capital: 'Moscow').save(flush: true, failOnError: true)
-        new Country(title: 'test2', capital: 'Berlin').save(flush: true, failOnError: true)
-        Country country = new Country(title: 'test3', capital: 'Pathos').save(flush: true, failOnError: true)
-        new Country(title: 'test4', capital: 'Paris').save(flush: true, failOnError: true)
-        new Country(title: 'test5', capital: 'Madrid').save(flush: true, failOnError: true)
-        assert false, "TODO: Provide a setupData() implementation for this generated test suite"
+        new Country(title: 'Country1', capital: 'Capital1').save(flush: true, failOnError: true)
+        new Country(title: 'Country2', capital: 'Capital2').save(flush: true, failOnError: true)
+        Country country = new Country(title: 'test3', capital: 'Capital3').save(flush: true, failOnError: true)
+        new Country(title: 'Country3', capital: 'Capital4').save(flush: true, failOnError: true)
+        new Country(title: 'Country4', capital: 'Capital5').save(flush: true, failOnError: true)
         country.id
     }
 
-    @DirtiesContext
     void "test get"() {
         setupData()
 
         expect:
-        Country.get(1) != null
+        countryService.get(1) != null
     }
 
     void "test list"() {
@@ -41,9 +36,9 @@ class CountryServiceSpec extends Specification {
         when:
         List<Country> countryList = countryService.list(max: 2, offset: 2)
 
-        then:
+        then: 'Not empty list returned'
         countryList.size() == 2
-        assert false, "TODO: Verify the correct instances are returned"
+        countryList.get(0).getId() == 3
     }
 
     void "test count"() {
@@ -65,15 +60,18 @@ class CountryServiceSpec extends Specification {
 
         then:
         countryService.count() == 4
+
+        and:
+        countryService.get(countryId) == null
     }
 
     void "test save"() {
         when:
-        assert false, "TODO: Provide a valid instance to save"
-        Country country = new Country()
+        Country country = new Country(title: 'Country', capital: 'Capital')
         countryService.save(country)
 
         then:
         country.id != null
     }
+
 }
