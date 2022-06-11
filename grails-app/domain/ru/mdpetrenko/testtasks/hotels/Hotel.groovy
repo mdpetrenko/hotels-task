@@ -34,7 +34,6 @@ class Hotel {
     static mapping = {
         stars(enumType: "ordinal")
         sort stars: "desc", title: "asc"
-
     }
 
     String toString() {

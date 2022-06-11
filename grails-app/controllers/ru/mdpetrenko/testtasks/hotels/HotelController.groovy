@@ -19,11 +19,6 @@ class HotelController {
         respond hotelService.get(id)
     }
 
-    def search (String titlePart) {
-        def hotels = hotelService.findAllByTitleIlike('%' + titlePart + '%')
-        respond hotels, model: [hotelCount: hotels.size()]
-    }
-
     def create() {
         respond new Hotel(params)
     }

@@ -9,6 +9,8 @@ interface HotelService {
 
     List<Hotel> list(Map args)
 
+    List<Hotel> findAllByTitleIlikeAndCountry(String title, Country country)
+
     List<Hotel> findAllByTitleIlike(String title)
 
     Long count()

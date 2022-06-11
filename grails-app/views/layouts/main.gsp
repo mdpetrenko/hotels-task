@@ -27,7 +27,7 @@
             <g:pageProperty name="page.nav"/>
             <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.logicalPropertyName }}">
                 <li class="controller">
-                    <g:link controller="${c.logicalPropertyName}">${c.name}</g:link>
+                    <g:link controller="${c.logicalPropertyName}"><g:message code="custom.label" args="[c.name]"/></g:link>
                 </li>
             </g:each>
         </ul>
@@ -40,11 +40,6 @@
 
 <div class="fixed-bottom" role="contentinfo">
 
-</div>
-
-
-<div id="spinner" class="spinner" style="display:none;">
-    <g:message code="spinner.alt" default="Loading&hellip;"/>
 </div>
 
 <asset:javascript src="application.js"/>

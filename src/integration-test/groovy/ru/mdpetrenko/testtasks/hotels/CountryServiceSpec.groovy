@@ -3,30 +3,36 @@ package ru.mdpetrenko.testtasks.hotels
 import grails.gorm.transactions.Rollback
 import grails.testing.mixin.integration.Integration
 import org.hibernate.SessionFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.annotation.DirtiesContext
 import spock.lang.Specification
 
 @Integration
-@Rollback
+//@Rollback
 class CountryServiceSpec extends Specification {
 
+    @Autowired
     CountryService countryService
     SessionFactory sessionFactory
 
     private Long setupData() {
-        new Country(title: 'Russia', capital: 'Moscow').save(flush: true, failOnError: true)
-        new Country(title: 'Germany', capital: 'Berlin').save(flush: true, failOnError: true)
-        Country country = new Country(title: 'Cyprus', capital: 'Pathos').save(flush: true, failOnError: true)
-        new Country(title: 'France', capital: 'Paris').save(flush: true, failOnError: true)
-        new Country(title: 'Spain', capital: 'Madrid').save(flush: true, failOnError: true)
+        hotels.each { it.delete(flush: true, failOnError: true) }
+        Country.findAll().each { it.delete(flush: true, failOnError: true) }
+        new Country(title: 'test1', capital: 'Moscow').save(flush: true, failOnError: true)
+        new Country(title: 'test2', capital: 'Berlin').save(flush: true, failOnError: true)
+        Country country = new Country(title: 'test3', capital: 'Pathos').save(flush: true, failOnError: true)
+        new Country(title: 'test4', capital: 'Paris').save(flush: true, failOnError: true)
+        new Country(title: 'test5', capital: 'Madrid').save(flush: true, failOnError: true)
         assert false, "TODO: Provide a setupData() implementation for this generated test suite"
         country.id
     }
 
+    @DirtiesContext
     void "test get"() {
         setupData()
 
         expect:
-        countryService.get(1) != null
+        Country.get(1) != null
     }
 
     void "test list"() {

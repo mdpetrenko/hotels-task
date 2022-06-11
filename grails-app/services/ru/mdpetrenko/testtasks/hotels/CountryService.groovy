@@ -15,6 +15,6 @@ interface CountryService {
 
     Country save(Country country)
 
-    Country save(String title, String capital)
+    Country findByTitle(String title)
 
 }

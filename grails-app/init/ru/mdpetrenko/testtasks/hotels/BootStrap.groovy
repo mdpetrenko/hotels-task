@@ -1,13 +1,12 @@
 package ru.mdpetrenko.testtasks.hotels
 
 class BootStrap {
-    CountryService countryService
     HotelService hotelService
 
     def init = { servletContext ->
-        Country russia = countryService.save('Russia', 'Moscow')
-        Country cyprus = countryService.save('Cyprus', 'Pathos')
-        Country germany = countryService.save('Germany', 'Berlin')
+        Country russia = new Country(title: 'Russia', capital: 'Moscow').save()
+        Country cyprus = new Country(title:  "Cyprus", capital:  'Pathos').save()
+        Country germany = new Country(title:  'Germany', capital:  'Berlin').save()
         hotelService.save('Radisson', russia, Hotel.Stars.FOUR, null)
         hotelService.save('Hyatt', russia, Hotel.Stars.FIVE, 'https://www.hyatt.com/ru-RU/home')
         hotelService.save('Axel', russia, Hotel.Stars.TWO, 'https://www.hyatt.com/ru-RU/home')
