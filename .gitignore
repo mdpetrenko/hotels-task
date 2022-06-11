@@ -14,3 +14,4 @@ out/
 gradlew**
 grailsw**
 grails-wrapper.jar
+lib**
