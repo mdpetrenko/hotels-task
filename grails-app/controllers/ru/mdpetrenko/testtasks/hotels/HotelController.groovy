@@ -7,6 +7,7 @@ import static org.springframework.http.HttpStatus.*
 class HotelController {
 
     HotelService hotelService
+    CountryService countryService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -87,6 +88,16 @@ class HotelController {
             '*' { render status: NO_CONTENT }
         }
     }
+
+    def search(String titlePart, String countryTitle) {
+        def hotelList = countryTitle != ''
+                ? hotelService.findAllByTitleIlikeAndCountry('%' + titlePart + '%', countryService.findByTitle(countryTitle))
+                : hotelService.findAllByTitleIlike('%' + titlePart + '%')
+        if (hotelList.isEmpty()) {
+            flash.message = message(code: 'list.empty.label', default: 'Results not found')
+        }
+            respond(hotelList: hotelList, hotelCount: hotelList.size())
+        }
 
     protected void notFound() {
         request.withFormat {

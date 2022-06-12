@@ -10,8 +10,7 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its justify-content-center h-auto">
-        <h1><g:message code="hotels.search.label" args="${Hotel}"/></h1>
-        <g:form name="searchForm" url="[controller: 'home', action: 'search']">
+        <g:form name="searchForm" url="[controller: 'hotel', action: 'search']">
             <g:set var="countries" value="${Country.list()}"/>
             <fieldset>
                 <g:field type="text" name="titlePart" placeholder="${message(code: 'hotel.form.label')}"/>

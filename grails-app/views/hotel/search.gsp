@@ -9,10 +9,7 @@
 <body>
 <div id="search-hotel" class="content scaffold-list" role="main">
     <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <g:if test="${hotelCount == 0}">
-        <h1><g:message code="list.empty.label"/></h1>
+        <div class="message h1" role="status">${flash.message}</div>
     </g:if>
     <g:else>
         <h1>${message(code: 'search.results.label', args: hotelCount)}</h1>
@@ -40,7 +37,7 @@
 
     <div class="nav" role="navigation">
         <ul>
-            <li><a class="home" href="${createLink(uri: '/')}">Новый поиск</a></li>
+            <li><a class="home" href="${createLink(uri: '/')}"><g:message code="search.repeat.label"/></a></li>
         </ul>
     </div>
 </div>
