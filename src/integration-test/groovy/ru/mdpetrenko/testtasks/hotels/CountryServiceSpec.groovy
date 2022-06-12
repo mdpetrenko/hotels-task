@@ -38,7 +38,6 @@ class CountryServiceSpec extends Specification {
 
         then: 'Not empty list returned'
         countryList.size() == 2
-        countryList.get(0).getId() == 3
     }
 
     void "test count"() {

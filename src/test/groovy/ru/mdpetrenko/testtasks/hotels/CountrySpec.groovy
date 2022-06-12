@@ -1,57 +1,84 @@
 package ru.mdpetrenko.testtasks.hotels
 
 import grails.testing.gorm.DomainUnitTest
-import grails.validation.ValidationException
 import spock.lang.Specification
+import spock.lang.Subject
+
 
 class CountrySpec extends Specification implements DomainUnitTest<Country> {
 
+    @Subject
+    Country country
+
     def setup() {
+        country = new Country()
     }
 
     def cleanup() {
     }
 
-    void "test country name is too long"() {
-        when: "Title length too long"
-        StringBuilder sb = new StringBuilder();
-        for (i in 0..<256) {
-            sb.append("Country")
-        }
-        Country countryLongName = new Country(title: sb.toString(), capital: 'Capital')
-        countryService.save(countryLongName)
-
-        then: "Validation exception is expected"
-        !domain.validate(['title'])
-        domain.errors['title'].code == 'maxSize.exceeded'
-    }
-
-    void "test country name is blank"() {
-        when: "Title is empty"
-        Country countryEmptyName = new Country(title: '  ', capital: 'Capital')
-        countryService.save(countryEmptyName)
-
-        then: "Validation exception is expected"
-        thrown(ValidationException)
-    }
-
-    void "test country name is null"() {
-        when: "Title is null"
-        Country countryNullName = new Country(capital: 'Capital')
-        countryService.save(countryNullName)
-
-        then: "Validation exception is expected"
-
-        thrown(ValidationException)
-    }
-
-    void "capital is blank"() {
+    void 'test country title cannot be null'() {
         when:
-        Country country = new Country(title: 'Country')
-        countryService.save(country)
+        country.title = null
 
         then:
-        thrown(ValidationException)
+        !country.validate(['title'])
+        country.errors['title'].code == 'nullable'
+    }
+
+    void 'test country title cannot be blank'() {
+        when:
+        country.title = ''
+
+        then:
+        !country.validate(['title'])
+    }
+
+    void 'test country title maxSize 255'() {
+        when:
+        country.title = 'c' * 256
+
+        then:
+        !country.validate(['title'])
+        country.errors['title'].code == 'maxSize.exceeded'
+
+        when: 'correct title'
+        country.title = 'c' * 255
+
+        then:
+        country.validate(['title'])
+    }
+
+    void 'test capital cannot be null'() {
+        when:
+        country.capital = null
+
+        then:
+        !country.validate(['capital'])
+        country.errors['capital'].code == 'nullable'
+    }
+
+    void 'test capital cannot be blank'() {
+        when:
+        country.capital = ''
+
+        then:
+        !country.validate(['capital'])
+    }
+
+    void 'test capital maxSize 128'() {
+        when:
+        country.capital = 'c' * 129
+
+        then:
+        !country.validate(['capital'])
+        country.errors['capital'].code == 'maxSize exceeded'
+
+        when:
+        country.capital = 'c' * 128
+
+        then:
+        country.validate(['capital'])
     }
 
 }
