@@ -15,6 +15,7 @@ class BootStrap {
             hotelService.save('Axel', russia, Hotel.Stars.TWO, 'https://www.hyatt.com/ru-RU/home')
             hotelService.save('Tsokkos', cyprus, Hotel.Stars.FOUR, 'https://www.tsokkos.com/')
             hotelService.save('Tsokkos Gardens', cyprus, Hotel.Stars.THREE, 'https://www.tsokkos.com/')
+            hotelService.save('Evalena', cyprus, Hotel.Stars.THREE, null)
             hotelService.save('Leonardo Royal Hotel Frankfurt', germany, Hotel.Stars.FOUR, null)
         }
 

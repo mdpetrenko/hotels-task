@@ -9,6 +9,7 @@
 <body>
 
 <div id="content" role="main">
+    <div class="h1 text-center"><g:message code="hotels.search.label" default="Hotel search"/></div>
     <section class="row colset-2-its justify-content-center h-auto">
         <g:form name="searchForm" url="[controller: 'hotel', action: 'search']">
             <g:set var="countries" value="${Country.list()}"/>

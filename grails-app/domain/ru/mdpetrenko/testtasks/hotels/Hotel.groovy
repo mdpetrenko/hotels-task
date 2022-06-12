@@ -26,9 +26,9 @@ class Hotel {
         title maxSize: 255, unique: 'country', nullable: false
         site validator: {
             if (it != null && !it.startsWith("http://") && !it.startsWith("https://")) {
-                return ['notValidUrl']
+                return ['invalidUrl']
             }
-        }, nullable: true, url: true
+        }, nullable: true, blank: true, url: true
     }
 
     static mapping = {
