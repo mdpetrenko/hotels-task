@@ -22,7 +22,11 @@
                     </td>
                 </g:else>
             </g:each>
-            <td><g:link class="edit" action="edit" resource="${bean}"><g:message code="default.button.edit.label" default="Edit"/></g:link></td>
+            <td class="w-auto">
+                <g:form resource="${bean}" method="DELETE">
+                        <g:link class="btn btn-outline-dark text-decoration-none" action="edit" resource="${bean}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                        <input class="btn btn-outline-dark" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                </g:form>
         </tr>
     </g:each>
     </tbody>
